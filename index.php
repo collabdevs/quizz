@@ -168,6 +168,11 @@
             controller:'CameraController as Camera',
             templateUrl:'views/camera.html'
           })
+
+          .when('/perguntas', {
+            controller:'PerguntasController as Perguntas',
+            templateUrl:'views/perguntas.html'
+          })
           .when('/edit/:projectId', {
             controller:'EditProjectController as editProject',
             templateUrl:'detail.html',
@@ -398,6 +403,9 @@
       .controller('ProjectListController', function(projects) {
         var projectList = this;
         projectList.projects = projects;
+      })
+      .controller('PerguntasController', function() {
+        
       })
        
       .controller('NewProjectController', function($location, projects) {
