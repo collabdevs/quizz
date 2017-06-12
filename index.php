@@ -408,12 +408,15 @@
         var Perguntas = this;
 
 
+    
          $http.get("perguntas.php" )
                 .then(
                   /* sucesso */
                   function(response) {
                     console.log("Your name is: " + response.data);
                     Perguntas.perguntas = response.data;
+                    Perguntas.pergunta = response.data[0];
+                    Perguntas.pergunta_index = 0;
                   },
                   /* falha */
                   function(error) {
@@ -422,7 +425,8 @@
 
 
         Perguntas.responder = function(){
-          alert("respondendo");
+          Perguntas.pergunta_index ++;
+          Perguntas.pergunta = Perguntas.perguntas[Perguntas.pergunta_index];
           $http.post("gabarito.php" , {"Q":0 , "R": 1})
                 .then(
                   /* sucesso */

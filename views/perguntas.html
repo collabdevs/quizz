@@ -1,10 +1,10 @@
    <section>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8"  ng-repeat="p in Perguntas.perguntas track by $index">
-            <h3>Pergunta </h3>
-            <p><strong>{{p.pergunta}}</strong> </p>
-            <span ng-repeat="resposta in p.respostas"><h4>resposta {{resposta.opcao}}</h4>
+          <div class="col-lg-8">
+            <h3>Pergunta {{Perguntas.pergunta_index+1}}</h3>
+            <p><strong>{{Perguntas.pergunta.pergunta}}</strong> </p>
+            <span ng-repeat="resposta in Perguntas.pergunta.respostas"><h4>resposta {{resposta.opcao}}</h4>
             <blockquote>
               <p> {{resposta.texto}}</p>
             </blockquote>
@@ -14,7 +14,8 @@
                 <div class="col-md-12 form-group">
                   <label for="category">Resposta</label>
                   <select id="category" placeholder="Choose category" class="form-control select2"> 
-                    <option span ng-repeat="resposta in p.respostas">{{resposta.opcao}}</option>
+
+                    <option span ng-repeat="resposta in Perguntas.pergunta.respostas">{{resposta.opcao}}</option>
                   </select>
                 </div>
               </div>
