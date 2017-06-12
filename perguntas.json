@@ -1,0 +1,10 @@
+[
+	{"pergunta"  : "Depois de saber o que deve fazer para atingir o objetivo, quando o cliente deve iniciar o planejamento?",
+	 "respostas" : [{"A":"Ainda hoje"}, {"B":"1 semana antes do objetivo"}],
+	 "correta"   : "B"},
+	{"pergunta"  : "Qual a melhor forma de garantir que o cliente virá para a consultoria?",
+	 "respostas" : [{"A":"Ligação de vantagem antes da consultoria"}, {"B":"Torcer com entusiasmo para que ele venha"}],
+	 "correta"   : "A"},
+	{"pergunta"  : "Por que perguntar as expectativas do cliente no começo da consultoria?",
+	 "respostas" : [{"A":"Para anotar no papel e o layot ficar mais bonito"}, {"B":"Para alinhar sua apresentação com a expectativa e garantir que ele saia satisfeito"}],
+	 "correta"   : "A"}]

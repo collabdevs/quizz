@@ -1,0 +1,12 @@
+{
+    "name": "root/quizz",
+    "authors": [
+        {
+            "name": "Daniel Medeiros",
+            "email": "danielmmf@gmail.com"
+        }
+    ],
+    "require": {
+        "ktamas77/firebase-php": "dev-master"
+    }
+}

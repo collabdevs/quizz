@@ -404,7 +404,36 @@
         var projectList = this;
         projectList.projects = projects;
       })
-      .controller('PerguntasController', function() {
+      .controller('PerguntasController', function($http) {
+        var Perguntas = this;
+
+
+         $http.get("perguntas.php" )
+                .then(
+                  /* sucesso */
+                  function(response) {
+                    console.log("Your name is: " + response.data);
+                    Perguntas.perguntas = response.data;
+                  },
+                  /* falha */
+                  function(error) {
+                    console.log("The request failed: " + error);
+                });
+
+
+        Perguntas.responder = function(){
+          alert("respondendo");
+          $http.post("gabarito.php" , {"Q":0 , "R": 1})
+                .then(
+                  /* sucesso */
+                  function(response) {
+                    console.log("Your name is: " + response.data);
+                  },
+                  /* falha */
+                  function(error) {
+                    console.log("The request failed: " + error);
+                });
+        }
         
       })
        
