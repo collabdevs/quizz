@@ -456,6 +456,12 @@
                 });
         Perguntas.acertos = 0;
 
+        Perguntas.clicar_resposta = function(opcao){
+          $('#category').val(opcao);
+          Perguntas.responder();
+
+        }
+
         Perguntas.responder = function(){
           console.log(Perguntas.pergunta);
           var email = localStorage.getItem('logado_email');
