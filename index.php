@@ -155,6 +155,7 @@
        
         $routeProvider
           .when('/', {
+            controller:'IndexController as Index',
             templateUrl:'views/login.html'
           })
           .when('/instrucoes', {
@@ -188,8 +189,35 @@
           });
       })
 
-      .controller('RegistrarController', function() {
 
+      .controller('IndexController', function($location , $http) {
+        var Index = this;
+        Index.logar = function() {
+          var email = $("#email").val();
+          $http.post("login.php" , {"email": email})
+            .then(
+              /* sucesso */
+              function(response) {
+                if(response.data.logado){
+                  localStorage.setItem('logado', 1);
+                  localStorage.setItem('logado_email', email);
+                  localStorage.setItem('logado_id', response.data.id);
+                  $location.path('/instrucoes');
+                }else{
+                  alert(response.data.mensagem);
+                }
+                console.log( response.data);
+              },
+              /* falha */
+              function(error) {
+                console.log(error);
+            });
+
+          // $location.path('/instrucoes');
+        };
+      })
+
+      .controller('RegistrarController', function() {
 
         var showPosition = function(position) {
 
@@ -413,7 +441,7 @@
                 .then(
                   /* sucesso */
                   function(response) {
-                    console.log("Your name is: " + response.data);
+                    console.log(response.data);
                     Perguntas.perguntas = response.data;
                     Perguntas.pergunta = response.data[0];
                     Perguntas.pergunta_index = 0;
@@ -425,18 +453,23 @@
 
 
         Perguntas.responder = function(){
-          Perguntas.pergunta_index ++;
-          Perguntas.pergunta = Perguntas.perguntas[Perguntas.pergunta_index];
-          $http.post("gabarito.php" , {"Q":0 , "R": 1})
-                .then(
-                  /* sucesso */
-                  function(response) {
-                    console.log("Your name is: " + response.data);
-                  },
-                  /* falha */
-                  function(error) {
-                    console.log("The request failed: " + error);
-                });
+          console.log(Perguntas.pergunta);
+          var email = localStorage.getItem('logado_email');
+          var id_logado = localStorage.getItem('logado_id');
+          
+          
+          $http.post("gabarito.php" , {"Q": Perguntas.pergunta_index , "R": $('#category').val() , 'id_logado': id_logado})
+            .then(
+              /* sucesso */
+              function(response) {
+                console.log( response.data);
+              },
+              /* falha */
+              function(error) {
+                console.log(error);
+            });
+            Perguntas.pergunta_index ++;
+            Perguntas.pergunta = Perguntas.perguntas[Perguntas.pergunta_index];
         }
         
       })
