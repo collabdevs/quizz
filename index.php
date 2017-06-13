@@ -103,6 +103,7 @@
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
     <!---->
     <script>
+      var perguntas_liberado = 1;
       angular.module('project', ['ngRoute', 'firebase'])
  
      
@@ -505,7 +506,7 @@
                   alert("voce acertou");
 
                   Perguntas.acertos ++;
-                  if(Perguntas.acertos == 2){
+                  if(Perguntas.acertos == perguntas_liberado){
                     $location.path('/liberado');
                   }
 
