@@ -2,7 +2,7 @@
 
 
 $params = json_decode(file_get_contents('php://input'),true);
-//print_r($params);
+
 
 include 'vendor/autoload.php';
 const DEFAULT_URL = 'https://falamebolsa.firebaseio.com';
@@ -13,7 +13,7 @@ $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
 //print_r($firebase);
 
-
+$params['hora'] = new DateTime('NOW');
 // --- reading the stored string ---
 $name = $firebase->get(DEFAULT_PATH . '/questionarios/w1/0/'.$params['Q']);
 $questao = json_decode($name, true);

@@ -195,6 +195,7 @@
 
 
       .controller('IndexController', function($location , $http) {
+
         var Index = this;
         Index.logar = function() {
           var email = $("#email").val();
@@ -228,6 +229,9 @@
 
         //Paulista var location = new google.maps.LatLng(-23.5632103, -46.6542503);
          var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         localStorage.setItem('lat',position.coords.latitude);
+         localStorage.setItem('long',position.coords.longitude);
+         localStorage.setItem('location',location);
 
             var mapCanvas = document.getElementById('map');
             var mapOptions = {
@@ -474,9 +478,22 @@
             return false;
           }
 
+
+
+         var lat = localStorage.getItem('lat');
+         var long = localStorage.getItem('long');
+         if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                  lat = position.coords.latitude;
+                  long = position.coords.longitude;
+                  localStorage.setItem('lat',lat);
+                  localStorage.setItem('long',long);
+                });
+          } 
+
+
           
-          
-          $http.post("gabarito.php" , {"Q": Perguntas.pergunta_index , "R":  opcao , 'id_logado': id_logado})
+          $http.post("gabarito.php" , {"Q": Perguntas.pergunta_index , "R":  opcao , 'id_logado': id_logado, "lat":  lat , 'long': long})
             .then(
               /* sucesso */
               function(response) {
