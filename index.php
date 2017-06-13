@@ -174,6 +174,10 @@
             controller:'PerguntasController as Perguntas',
             templateUrl:'views/perguntas.html'
           })
+          .when('/liberado', {
+            controller:'LiberadoController as Liberado',
+            templateUrl:'views/liberado.html'
+          })
           .when('/edit/:projectId', {
             controller:'EditProjectController as editProject',
             templateUrl:'detail.html',
@@ -432,7 +436,7 @@
         var projectList = this;
         projectList.projects = projects;
       })
-      .controller('PerguntasController', function($http) {
+      .controller('PerguntasController', function($http,$location) {
         var Perguntas = this;
 
 
@@ -450,28 +454,54 @@
                   function(error) {
                     console.log("The request failed: " + error);
                 });
-
+        Perguntas.acertos = 0;
 
         Perguntas.responder = function(){
           console.log(Perguntas.pergunta);
           var email = localStorage.getItem('logado_email');
           var id_logado = localStorage.getItem('logado_id');
+
+          
+          var opcao = $('#category').val();
+          if(opcao == "escolha"){
+            alert("escolha uma resposta !");
+            return false;
+          }
+
           
           
-          $http.post("gabarito.php" , {"Q": Perguntas.pergunta_index , "R": $('#category').val() , 'id_logado': id_logado})
+          $http.post("gabarito.php" , {"Q": Perguntas.pergunta_index , "R":  opcao , 'id_logado': id_logado})
             .then(
               /* sucesso */
               function(response) {
                 console.log( response.data);
+                if(response.data.resposta == 1){
+                  alert("voce acertou");
+
+                  Perguntas.acertos ++;
+                  if(Perguntas.acertos == 2){
+                    $location.path('/liberado');
+                  }
+
+                }
+                else{
+                  alert("voce errou");
+                }
+
+                Perguntas.pergunta_index ++;
+                Perguntas.pergunta = Perguntas.perguntas[Perguntas.pergunta_index];
               },
               /* falha */
               function(error) {
                 console.log(error);
             });
-            Perguntas.pergunta_index ++;
-            Perguntas.pergunta = Perguntas.perguntas[Perguntas.pergunta_index];
+            
         }
         
+      })
+
+       .controller('LiberadoController', function() {
+        var Liberado = this;
       })
        
       .controller('NewProjectController', function($location, projects) {

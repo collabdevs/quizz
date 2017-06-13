@@ -15,8 +15,11 @@ $firebase = new \Firebase\FirebaseLib(DEFAULT_URL, DEFAULT_TOKEN);
 
 
 // --- reading the stored string ---
-$name = $firebase->get(DEFAULT_PATH . '/questionarios/w1/0/'+$params['Q']);
-print_r($params);
-
+$name = $firebase->get(DEFAULT_PATH . '/questionarios/w1/0/'.$params['Q']);
+$questao = json_decode($name, true);
+if ($params['R'] == $questao['correta'])
+	echo '{"resposta":"1"}';
+else
+	echo '{"resposta":"0"}';
 
 $firebase->set(DEFAULT_PATH . '/respostas/w1/0/'.$params['id_logado'].'/'.$params['Q'], $params);

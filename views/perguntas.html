@@ -2,7 +2,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <h3>Pergunta {{Perguntas.pergunta_index+1}}</h3>
+            <h3>Pergunta {{Perguntas.pergunta_index+1}}  -- acertos {{Perguntas.acertos}}/2</h3>
             <p><strong>{{Perguntas.pergunta.pergunta}}</strong> </p>
             <span ng-repeat="resposta in Perguntas.pergunta.respostas"><h4>resposta {{resposta.opcao}}</h4>
             <blockquote>
@@ -14,7 +14,7 @@
                 <div class="col-md-12 form-group">
                   <label for="category">Resposta</label>
                   <select id="category" placeholder="Choose category" class="form-control select2"> 
-
+                  <option span >escolha</option>
                     <option span ng-repeat="resposta in Perguntas.pergunta.respostas">{{resposta.opcao}}</option>
                   </select>
                 </div>
