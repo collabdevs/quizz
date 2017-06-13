@@ -207,6 +207,9 @@
                   localStorage.setItem('logado', 1);
                   localStorage.setItem('logado_email', email);
                   localStorage.setItem('logado_id', response.data.id);
+                  localStorage.setItem('acesso', response.data.acesso);
+                  localStorage.setItem('grupo', response.data.grupo);
+                  localStorage.setItem('nome', response.data.nome);
                   $location.path('/instrucoes');
                 }else{
                   alert(response.data.mensagem);
