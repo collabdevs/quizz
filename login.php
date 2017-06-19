@@ -12,15 +12,15 @@ use Kreait\Firebase\ServiceAccount;
 
 $params = json_decode(file_get_contents('php://input'),true);
 
-	try {
+try {
 
-		$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/falamebolsa-firebase-adminsdk-w7t5v-7b79151d08.json');
-		$firebase = (new Factory)
-	    ->withServiceAccount($serviceAccount)
-	    ->create();
-	} catch (Exception $e) {
-		var_dump($e);
-	}
+	$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/falamebolsa-firebase-adminsdk-w7t5v-7b79151d08.json');
+	$firebase = (new Factory)
+    ->withServiceAccount($serviceAccount)
+    ->create();
+} catch (Exception $e) {
+	var_dump($e);
+}
 
 
 
