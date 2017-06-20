@@ -293,9 +293,9 @@
       })
        
       .controller('CameraController', function() {
+          var Camera = this;
 
-
-          var ss = function(){
+          Camera.ss = function(){
               alert("ss");
           }
 
